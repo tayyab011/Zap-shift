@@ -1,8 +1,44 @@
 import React from 'react';
 import Logo from '../components/Logo';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
+import useAuth from '../useHooks/useAuth';
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+  const link = (
+    <>
+      <NavLink
+        className="hover:bg-green-500 rounded-md px-4 py-2"
+        to="/services"
+      >
+        Services
+      </NavLink>
+      <NavLink
+        className="hover:bg-green-500 rounded-md px-4 py-2"
+        to="/coverage"
+      >
+        Coverage
+      </NavLink>
+      <NavLink
+        className="hover:bg-green-500 rounded-md px-4 py-2"
+        to="/aboutus"
+      >
+        About Us
+      </NavLink>
+      <NavLink
+        className="hover:bg-green-500 rounded-md px-4 py-2"
+        to="/pricing"
+      >
+        Pricing
+      </NavLink>
+      <NavLink
+        className="hover:bg-green-500 rounded-md px-4 py-2"
+        to="/be-rider"
+      >
+        Be a Rider
+      </NavLink>
+    </>
+  );
     return (
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
@@ -26,25 +62,9 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-green-100 rounded-box h-75 z-1 mt-3 text-center w-52 p-5 shadow space-y-3"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {link}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">
@@ -52,30 +72,22 @@ const Navbar = () => {
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <NavLink to="/coverage">coverage</NavLink>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal  gap-6">{link}</ul>
         </div>
+
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user ? (
+            <Link onClick={logout} className="btn">
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          )}
+          <Link to="/be-rider" className="btn">
+          Be A Rider
+          </Link>
         </div>
       </div>
     );

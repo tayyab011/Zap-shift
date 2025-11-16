@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../useHooks/useAuth";
+import { Link } from "react-router";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   const { registerUger } = useAuth();
@@ -64,6 +66,13 @@ registerUger(data.email,data.password).then(res=>{
           <button type="submit" className="btn btn-neutral mt-4">
             Register
           </button>
+          <SocialLogin/>
+          <p>
+            already Have an account to ZaoShift?{" "}
+            <Link className="underline" to="/login">
+              Login Now
+            </Link>
+          </p>
         </fieldset>
       </form>
     </div>
