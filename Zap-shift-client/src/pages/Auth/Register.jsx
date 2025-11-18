@@ -1,20 +1,47 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../useHooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import SocialLogin from "./SocialLogin";
+import axios from "axios";
 
 const Register = () => {
-  const { registerUger } = useAuth();
+  const location=useLocation()
+  console.log(location)
+  const { registerUger, updateUser } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const handleRegistration=(data)=>{
-console.log("After",data)
+console.log("After",data.photo[0])
+const photo=data.photo[0]
 registerUger(data.email,data.password).then(res=>{
-  console.log(res.user)
+  console.log(res.user);
+
+  /* 1 store image  IN FORM DATA*/
+
+  const formData = new FormData();
+  formData.append("image", photo);
+
+  /* 2 send the photo and get uri*/
+  axios
+    .post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`,
+      formData
+    )
+    .then((res) => {
+      console.log("after img upld", res.data.data.url);
+      const userprofile = {
+        displayName: data.name,
+        photoURL: res.data.data.url,
+      };
+      /* 3 firebase e uri ta diye photoURL upload kroa*/
+      updateUser(userprofile)
+        .then((res) => console.log("after img upld", res))
+        .catch((err) => console.log(err));
+    });
 }).catch(err=>{
   console.log(err)
 })
@@ -24,7 +51,27 @@ registerUger(data.email,data.password).then(res=>{
       <form onSubmit={handleSubmit(handleRegistration)}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
           <legend className="fieldset-legend">Register</legend>
+          <label className="label">Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input w-full"
+            placeholder="Name"
+          />
+          {errors.name?.type === "required" && (
+            <p className="text-red-500">name is required</p>
+          )}
 
+          {/*  photo  */}
+          <label className="label">Photo</label>
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="input w-full cursor-pointer"
+          />
+          {errors.photo?.type === "required" && (
+            <p className="text-red-500">photo is required</p>
+          )}
           <label className="label">Email</label>
           <input
             type="text"
@@ -66,10 +113,10 @@ registerUger(data.email,data.password).then(res=>{
           <button type="submit" className="btn btn-neutral mt-4">
             Register
           </button>
-          <SocialLogin/>
+          <SocialLogin />
           <p>
             already Have an account to ZaoShift?{" "}
-            <Link className="underline" to="/login">
+            <Link state={location.state} className="underline" to="/login">
               Login Now
             </Link>
           </p>

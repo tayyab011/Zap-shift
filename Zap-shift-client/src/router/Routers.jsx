@@ -6,6 +6,11 @@ import Coverage from "../pages/Coverage/Coverage";
 import AuthLayout from './../Layout/AuthLayout';
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import Rider from "../pages/Rider/Rider";
+import PrivateRoute from "./PrivateRoute";
+import SendParcel from "../pages/sendpercel/SendParcel";
+import DashBoardLayout from "../Layout/DashBoardLayout";
+import MyPercels from './../pages/dashboards/MyPercels';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +22,23 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/rider",
+        element: (
+          <PrivateRoute>
+            <Rider />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/sendparcel",
+        loader: () => fetch("/servicecenter.json"),
+        element: (
+          <PrivateRoute>
+            <SendParcel />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/coverage",
         loader: () => fetch("/servicecenter.json"),
         element: <Coverage />,
@@ -26,17 +48,30 @@ export const router = createBrowserRouter([
 
   {
     path: "/",
-    element: <AuthLayout/>,
+    element: <AuthLayout />,
     children: [
       {
-        path:"/login",
-        element: <Login/>,
+        path: "/login",
+        element: <Login />,
       },
       {
-       path:"/registration",
-        element: <Register/>,
+        path: "/registration",
+        element: <Register />,
       },
-     
+    ],
+  },
+  {
+    path: "dashboard",
+    element: 
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ,
+    children: [
+      {
+        path: "mypercels",
+        element: <MyPercels />,
+      },
     ],
   },
 ]);

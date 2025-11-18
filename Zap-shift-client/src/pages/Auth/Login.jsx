@@ -1,10 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../useHooks/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
+    const {state} =useLocation()
+  console.log("login",state)
+    const navigate=useNavigate()
      const { signinUser } = useAuth();
       const {
     register,
@@ -15,13 +18,14 @@ const Login = () => {
 signinUser(data.email, data.password)
   .then((res) => {
     console.log(res.user);
+    navigate(state ?state :"/");
   })
   .catch((err) => {
     console.log(err);
   });
   }
     return (
-      <div className= "">
+      <div className="">
         <form onSubmit={handleSubmit(handlerLoginSubmit)}>
           <fieldset className="fieldset bg-base-200 mx-auto border-base-300  md:w-8/12 w-full rounded-box  border  p-4 ">
             <legend className="fieldset-legend">Login</legend>
@@ -68,7 +72,7 @@ signinUser(data.email, data.password)
             <SocialLogin />
             <p>
               new to ZaoShift?{" "}
-              <Link className="underline" to="/registration">
+              <Link state={state} className="underline" to="/registration">
                 Register Now
               </Link>
             </p>
