@@ -54,12 +54,12 @@ axiosSecure.delete(`/parcels/${id}`).then(res=>{
             {/* head */}
             <thead>
               <tr>
-                <th></th>
+                <th>id</th>
                 <th>Name</th>
                 <th>Cost</th>
                 <th>Payment </th>
-                <th>Delivery Status</th>
-                <th>Actions</th>
+          
+               
               </tr>
             </thead>
             <tbody>

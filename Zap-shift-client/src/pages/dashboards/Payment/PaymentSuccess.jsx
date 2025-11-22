@@ -17,13 +17,13 @@ const PaymentSuccess = () => {
         .patch(`/paymentSuccess?session_id=${sessionId}`)
         .then((res) => {
           console.log(res.data)
-          setPaymentinfo({
-            transaction: res.data.transaction,
-            trackingId: res.data.trackingId,
-          });
+         setPaymentinfo({
+           transaction: res.data.transaction,
+           trackingId: res.data.trackingId,
+         }); 
         });
     }
-  }, [sessionId, axiossecure]);
+  }, [sessionId]);
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       <div className="max-w-md w-full bg-base-100 shadow-xl rounded-2xl p-8 text-center">
@@ -43,14 +43,15 @@ const PaymentSuccess = () => {
           our service!
         </p>
         <p className="text-base-content/70 mb-6">
-          Yoyr transection id {paymentinfo?.transaction}
+          Yoyr transection id{" "}
+           : <span className="text-xs font-bold text-green-400">{paymentinfo?.transaction}</span>
         </p>
         <p className="text-base-content/70 mb-6">
-          Yoyr traking  id {paymentinfo?.trackingId}
+          Yoyr traking id : <span className="text-xs font-bold text-green-400">{paymentinfo?.trackingId}</span>
         </p>
 
         {/* Button */}
-        <a href="/" className="btn btn-primary w-full rounded-full">
+        <a href="/" className="btn btn-primary text-black hover:font-bold w-full rounded-full">
           Go to Home
         </a>
       </div>

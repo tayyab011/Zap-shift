@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
-
+import { CiDeliveryTruck } from "react-icons/ci";
 const DashBoardLayout = () => {
     return (
       <div className="w-11/12 mx-auto drawer lg:drawer-open">
@@ -41,9 +41,9 @@ const DashBoardLayout = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-40 is-drawer-open:w-64">
             {/* Sidebar content here */}
-            <ul className="menu w-full grow">
+            <ul className="menu w-full grow mr-50">
               {/* List item */}
               <li>
                 <Link
@@ -69,8 +69,26 @@ const DashBoardLayout = () => {
                 </Link>
               </li>
 
+              <li data-tip="Payments History">
+                <span>
+                  <CiDeliveryTruck className="my-1.5 inline-block size-4" />
+                  <NavLink
+                    to="/dashboard/mypercels"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My Percles"
+                  >
+                    My Percles
+                  </NavLink>
+                </span>
+              </li>
               <li>
-                <NavLink to="/dashboard/mypercels">My Percles</NavLink>
+                <NavLink
+                  to="/dashboard/mypercels"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip=" Payments History"
+                >
+                  Payments History
+                </NavLink>
               </li>
               {/* List item */}
               <li>
