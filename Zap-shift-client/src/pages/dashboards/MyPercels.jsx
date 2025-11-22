@@ -13,7 +13,7 @@ const axiosSecure=useAxiosSecure()
         queryFn :async()=>{
  const res = await axiosSecure.get(`/parcels?email=${user?.email}`)
 
- console.log(res.data)
+/*  console.log(res.data) */
  return res.data
         }
     })
@@ -76,7 +76,7 @@ axiosSecure.delete(`/parcels/${id}`).then(res=>{
                       <span>
                         <Link
                           to={`/dashboard/payment/${parcel?._id}`}
-                          className="btn btn-primary bg-gray-300 border-0 shadow-none text-black"
+                          className="btn btn-primary bg-orange-300 border-0 shadow-none text-black"
                         >
                           Pay
                         </Link>

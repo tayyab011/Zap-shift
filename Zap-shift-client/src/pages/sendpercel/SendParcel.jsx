@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import useAuth from "../../useHooks/useAuth";
 
 const SendParcel = () => {
+  const navigate=useNavigate()
     const axiosSecure=useAxiosSecure()
     const {user}=useAuth()
       const {
@@ -55,19 +56,29 @@ Swal.fire({
   showCancelButton: true,
   confirmButtonColor: "#3085d6",
   cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, Take it!",
+  confirmButtonText: "confirem and continue payment",
 }).then((result) => {
   if (result.isConfirmed) {
 
     axiosSecure.post("/parcels", data).then(res=>{
         console.log("after sending",res.data)
+      if (res.data.insertedId) {
+        navigate("/dashboard/mypercels");
+         Swal.fire({
+           position :"top-end",
+           title: "order confirmed",
+           text: "Your order has been confirmed",
+           icon: "success",
+           timer:1500,
+         });
+      }
     }).catch(err=>console.log(err))
-    
+ /*    
     Swal.fire({
       title: "order confirmed",
       text: "Your order has been confirmed",
       icon: "success",
-    });
+    }); */
   }
 });
 

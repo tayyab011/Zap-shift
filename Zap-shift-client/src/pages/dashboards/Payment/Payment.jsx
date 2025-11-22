@@ -8,12 +8,12 @@ const Payment = () => {
     const {id}=useParams();
  /*    console.log(id) */
   const axiosSecure=useAxiosSecure()
-    console.log(id)
+ /*    console.log(id) */
     const { data: parcel } = useQuery({
       queryKey: ["parcels", id],
       queryFn: async () => {
         const res = await axiosSecure.get(`/parcels/${id}`);
-        console.log(res);
+  /*       console.log(res); */
         return res.data;
       },
     });
