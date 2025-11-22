@@ -46,8 +46,8 @@ if (parceWeight<3) {
     }
 
 
-
-
+data.cost=cost;
+console.log(data)
 Swal.fire({
   title: "Agree With the Cost?",
   text: ` You  will be charged ${cost} Taka`,
