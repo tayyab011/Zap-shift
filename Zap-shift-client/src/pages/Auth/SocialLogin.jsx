@@ -1,11 +1,22 @@
 import React from 'react';
 import useAuth from '../../useHooks/useAuth';
+import useAxiosSecure from '../../useHooks/useAxiosSecure';
 
 const SocialLogin = () => {
+  const useaxiosSecure=useAxiosSecure()
     const {googlePopUp}=useAuth()
     const signinGoogle=()=>{
 googlePopUp().then(res=>{
-    console.log(res.user)
+  const userInfo = {
+    email: res.user.email,
+    displayName: res.user.displayName,
+    photoURL: res.user.photoURL,
+  };
+  console.log("social", res.user);
+ useaxiosSecure.post('/users',userInfo).then((res)=>{
+    console.log(res)
+  }) 
+    
 }).catch(err=>{
     console.log(err)
 })

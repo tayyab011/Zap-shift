@@ -101,9 +101,7 @@ const Navbar = () => {
               Login
             </Link>
           )}
-          <Link to="/rider" className="btn">
-            Be A Rider
-          </Link>
+         
         </div>
       </div>
     );

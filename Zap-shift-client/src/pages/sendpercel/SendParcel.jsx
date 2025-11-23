@@ -15,13 +15,16 @@ const SendParcel = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-    const serviceCenters=useLoaderData()
+    const serviceCenters=useLoaderData();
     const duplicateRegions = serviceCenters.map((c) => c.region);
-    const regions=[ ...new Set(duplicateRegions)]
+    const regions=[ ...new Set(duplicateRegions)];
+
   const senderRegion = watch("senderRegion");
   const reciverRegion = watch("reciverRegion");
+
     const districtByRegion=region=>{
         const regionDistrict=serviceCenters.filter(c=>c.region===region);
+        console.log("data district region",regionDistrict)
         const districts=regionDistrict.map(r=>r.district);
         return districts;
     }
