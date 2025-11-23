@@ -14,6 +14,7 @@ import MyPercels from './../pages/dashboards/MyPercels';
 import Payment from "../pages/dashboards/Payment/Payment";
 import PaymentSuccess from "../pages/dashboards/Payment/PaymentSuccess";
 import PaymentCancelled from "../pages/dashboards/Payment/PaymentCancelled";
+import PaymentHistory from "../pages/dashboards/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PaymentCancelled/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory/>
           </PrivateRoute>
         ),
       },

@@ -90,9 +90,12 @@ const Navbar = () => {
 
         <div className="navbar-end">
           {user ? (
-            <Link onClick={logout} className="btn">
-              Logout
-            </Link>
+            <>
+              <img   src={user?.photoURL}  className='w-10 h-10 rounded-full object-center mr-3'/>
+              <Link onClick={logout} className="btn">
+                Logout
+              </Link>
+            </>
           ) : (
             <Link to="/login" className="btn">
               Login
