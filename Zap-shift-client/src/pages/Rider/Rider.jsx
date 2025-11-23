@@ -5,6 +5,7 @@ import RIDER_IMG from "/agent-pending.png";
 import { useLoaderData } from "react-router";
 import useAxiosSecure from "../../useHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../useHooks/useAuth";
 export default function Rider() {
     const {
       register,
@@ -16,7 +17,8 @@ export default function Rider() {
       mode: "onTouched",
     });
     const serviceCenter=useLoaderData();
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure=useAxiosSecure();
+    const {user}=useAuth()
 const regions =serviceCenter.map(data=>data.region);
 const  region = [... new Set(regions)];
 
@@ -67,17 +69,17 @@ const res = await axiosSecure.post("/riders", data);
                     <span className="label-text">Your Name</span>
                   </label>
                   <input
-                    {...register("name", { required: "Name is required" })}
+                    disabled={true}
+                    {...register("name")}
                     placeholder="Your Name"
-                    className={`input input-bordered w-full ${
-                      errors.name ? "input-error" : ""
-                    }`}
+                    defaultValue={user?.displayName}
+                    className={`input input-bordered w-full `}
                   />
-                  {errors.name && (
+                  {/* {errors.name && (
                     <p className="text-error text-sm mt-1">
                       {errors.name.message}
                     </p>
-                  )}
+                  )} */}
                 </div>
 
                 <div>
@@ -111,9 +113,12 @@ const res = await axiosSecure.post("/riders", data);
                     <span className="label-text">Your Email</span>
                   </label>
                   <input
+                    disabled={true}
+                    defaultValue={user?.email}
                     type="email"
                     {...register("email", {
                       required: "Email is required",
+
                       pattern: {
                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                         message: "Invalid email address",
