@@ -3,7 +3,7 @@ import React from 'react';
 import useAxiosSecure from '../../../useHooks/useAxiosSecure';
 import { RiUserAddFill } from "react-icons/ri";
 import { HiUserRemove } from "react-icons/hi";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaEye, FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
 
@@ -61,18 +61,29 @@ return res.data
                 <td>{riders?.name}</td>
                 <td>{riders?.email}</td>
                 <td>{riders?.district}</td>
-                <td className={` font-bold ${riders.status ==="approved"?"text-green-400":"text-red-400"}`}>{riders?.status}</td>
+                <td
+                  className={` font-bold ${
+                    riders.status === "approved"
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {riders?.status}
+                </td>
                 <td className="flex gap-3">
+                  <button
+                   
+                    className="btn"
+                  >
+                    <FaEye />
+                  </button>
                   <button
                     onClick={() => handleApproval(riders)}
                     className="btn"
                   >
                     <RiUserAddFill />
                   </button>
-                  <button
-                    onClick={() => handleRemovel(riders)}
-                    className="btn"
-                  >
+                  <button onClick={() => handleRemovel(riders)} className="btn">
                     <HiUserRemove />
                   </button>
                   <button className="btn hover:text-red-500">

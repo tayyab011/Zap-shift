@@ -3,19 +3,21 @@ import { createBrowserRouter } from "react-router";
 import Root from "../Layout/Root";
 import Home from "../pages/Home/Home";
 import Coverage from "../pages/Coverage/Coverage";
-import AuthLayout from './../Layout/AuthLayout';
+import AuthLayout from "./../Layout/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Rider from "../pages/Rider/Rider";
 import PrivateRoute from "./PrivateRoute";
 import SendParcel from "../pages/sendpercel/SendParcel";
 import DashBoardLayout from "../Layout/DashBoardLayout";
-import MyPercels from './../pages/dashboards/MyPercels';
+import MyPercels from "./../pages/dashboards/MyPercels";
 import Payment from "../pages/dashboards/Payment/Payment";
 import PaymentSuccess from "../pages/dashboards/Payment/PaymentSuccess";
 import PaymentCancelled from "../pages/dashboards/Payment/PaymentCancelled";
 import PaymentHistory from "../pages/dashboards/Payment/PaymentHistory";
 import ApproveRiders from "../pages/dashboards/ApproveRiders/ApproveRiders";
+import ApproveUsers from "../pages/dashboards/ApproveUsers";
+import AdminPrivate from "./AdminPrivate";
 
 export const router = createBrowserRouter([
   {
@@ -117,9 +119,17 @@ export const router = createBrowserRouter([
       {
         path: "approve-riders",
         element: (
-          <PrivateRoute>
-            <ApproveRiders/>
-          </PrivateRoute>
+          <AdminPrivate>
+            <ApproveRiders />
+          </AdminPrivate>
+        ),
+      },
+      {
+        path: "approve-users",
+        element: (
+          <AdminPrivate>
+            <ApproveUsers />
+          </AdminPrivate>
         ),
       },
     ],
