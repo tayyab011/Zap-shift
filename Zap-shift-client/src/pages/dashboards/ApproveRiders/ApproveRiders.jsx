@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../../useHooks/useAxiosSecure';
 import { RiUserAddFill } from "react-icons/ri";
 import { HiUserRemove } from "react-icons/hi";
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 
 const ApproveRiders = () => {
+
     const axiossecure=useAxiosSecure()
     const {data :riders=[],refetch}=useQuery({
         queryKey:['riders','pending'],
@@ -48,9 +49,10 @@ return res.data
             <tr>
               <th>id</th>
               <th>Name</th>
-              <th>email</th>
+              <th>Email</th>
               <th>District </th>
-              <th>status</th>
+              <th>Status</th>
+              <th>Availability</th>
             </tr>
           </thead>
           <tbody>
@@ -61,6 +63,7 @@ return res.data
                 <td>{riders?.name}</td>
                 <td>{riders?.email}</td>
                 <td>{riders?.district}</td>
+
                 <td
                   className={` font-bold ${
                     riders.status === "approved"
@@ -70,11 +73,9 @@ return res.data
                 >
                   {riders?.status}
                 </td>
+                <td>{riders?.workStatus}</td>
                 <td className="flex gap-3">
-                  <button
-                   
-                    className="btn"
-                  >
+                  <button className="btn">
                     <FaEye />
                   </button>
                   <button
@@ -94,6 +95,8 @@ return res.data
             ))}
           </tbody>
         </table>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+      
       </div>
     );
 };

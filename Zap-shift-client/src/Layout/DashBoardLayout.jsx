@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaUser } from 'react-icons/fa';
 import useRole from '../useHooks/useRole';
+import { MdDirectionsBike } from "react-icons/md";
 const DashBoardLayout = () => {
   const {role}=useRole()
   console.log("ei page",role)
@@ -133,8 +134,22 @@ const DashBoardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-              { role === "admin" && 
+              {role === "admin" && (
                 <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/assign-riders"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assign Riders"
+                    >
+                      {/* Settings icon */}
+                      <MdDirectionsBike className="my-1.5 inline-block size-5" />
+                      
+                      <span className="is-drawer-close:hidden">
+                        Assign Riders
+                      </span>
+                    </NavLink>
+                  </li>
                   <li>
                     <NavLink
                       to="/dashboard/approve-riders"
@@ -224,7 +239,7 @@ const DashBoardLayout = () => {
                     </NavLink>
                   </li>
                 </>
-              }
+              )}
             </ul>
           </div>
         </div>

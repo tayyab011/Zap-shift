@@ -31,8 +31,12 @@ const regionWatch = watch("region");
   }
 
   const onSubmit = async (data) => {
+
+    data.riderImage = user?.photoURL
+
 const res = await axiosSecure.post("/riders", data);
     console.log("Submitted data:", data);
+
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
