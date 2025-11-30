@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaUser } from 'react-icons/fa';
+import { FaTasks, FaUser } from 'react-icons/fa';
 import useRole from '../useHooks/useRole';
 import { MdDirectionsBike } from "react-icons/md";
+import { SiGoogletasks } from "react-icons/si";
 const DashBoardLayout = () => {
   const {role}=useRole()
   console.log("ei page",role)
@@ -134,6 +135,37 @@ const DashBoardLayout = () => {
                   </span>
                 </NavLink>
               </li>
+              {role === "rider" && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/assigned-deliveries"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assigned Deliveries"
+                    >
+                      <FaTasks className="my-1.5 inline-block size-5" />
+
+                      <span className="is-drawer-close:hidden">
+                        Assigned Deliveries
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/completed-deliveries"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip=" Completed Deliveries"
+                    >
+                      <SiGoogletasks className="my-1.5 inline-block size-5" />
+
+                      <span className="is-drawer-close:hidden">
+                        Completed Deliveries
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
+
               {role === "admin" && (
                 <>
                   <li>
@@ -144,7 +176,7 @@ const DashBoardLayout = () => {
                     >
                       {/* Settings icon */}
                       <MdDirectionsBike className="my-1.5 inline-block size-5" />
-                      
+
                       <span className="is-drawer-close:hidden">
                         Assign Riders
                       </span>

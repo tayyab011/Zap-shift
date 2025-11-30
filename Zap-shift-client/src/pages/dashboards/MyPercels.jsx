@@ -58,9 +58,8 @@ axiosSecure.delete(`/parcels/${id}`).then(res=>{
                 <th>Name</th>
                 <th>Cost</th>
                 <th>Payment </th>
+                <th>Tracking id </th>
                 <th>Delivery Status </th>
-          
-               
               </tr>
             </thead>
             <tbody>
@@ -83,6 +82,12 @@ axiosSecure.delete(`/parcels/${id}`).then(res=>{
                         </Link>
                       </span>
                     )}
+                  </td>
+                  <td>
+                    <Link to={`/parcel-track/${parcel.trackingId}`}>
+                      {" "}
+                      {parcel?.trackingId}
+                    </Link>
                   </td>
                   <td>{parcel?.deliveryStatus}</td>
                   <button className="btn  mr-3">

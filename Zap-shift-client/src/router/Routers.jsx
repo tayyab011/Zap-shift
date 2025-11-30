@@ -19,6 +19,10 @@ import ApproveRiders from "../pages/dashboards/ApproveRiders/ApproveRiders";
 import ApproveUsers from "../pages/dashboards/ApproveUsers";
 import AdminPrivate from "./AdminPrivate";
 import Assignriders from "../pages/dashboards/Assignriders";
+import AssignedDeliveries from "../pages/dashboards/AssignedDeliveries";
+import RiderPrivate from "./RiderPrivate";
+import CompletedDeliveries from "../pages/dashboards/CompletedDeliveries";
+import ParcelTrack from './../pages/ParcelTrack/ParcelTrack';
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +55,11 @@ export const router = createBrowserRouter([
         path: "/coverage",
         loader: () => fetch("/servicecenter.json"),
         element: <Coverage />,
+      },
+      {
+        path: "parcel-track/:trackingId",
+       
+        element: <ParcelTrack/>,
       },
     ],
   },
@@ -117,11 +126,30 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      //rider routes
+      {
+        path: "assigned-deliveries",
+        element: (
+          <RiderPrivate>
+            <AssignedDeliveries />
+          </RiderPrivate>
+        ),
+      },
+      {
+        path: "completed-deliveries",
+        element: (
+          <RiderPrivate>
+            <CompletedDeliveries/>
+          </RiderPrivate>
+        ),
+      },
+
+      //admin routes
       {
         path: "assign-riders",
         element: (
           <AdminPrivate>
-            <Assignriders/>
+            <Assignriders />
           </AdminPrivate>
         ),
       },

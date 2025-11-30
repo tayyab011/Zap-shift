@@ -38,6 +38,7 @@ return res.data
         riderEmail: rider?.email,
         riderName: rider?.name,
         parcelId: selectedParcel?._id,
+        trackingId: selectedParcel.trackingId,
       };
 await useaxiosSecure.put(`/parcel/${selectedParcel?._id}`, riderInfo).then(res=>{
   if (res.data.modifiedCount) {
