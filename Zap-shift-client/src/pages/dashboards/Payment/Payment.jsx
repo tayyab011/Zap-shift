@@ -23,6 +23,7 @@ const paymentInfo = {
   parcelId: parcel._id,
   senderEmail: parcel.senderEmail,
   parcelName: parcel.parcelName,
+  trackingId: parcel.trackingId,
 };
 const res=await axiosSecure.post('/create-checkout-session',paymentInfo)
 console.log(res.data)
